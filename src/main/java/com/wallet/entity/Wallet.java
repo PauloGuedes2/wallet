@@ -1,0 +1,26 @@
+package com.wallet.entity;
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@Data
+@Entity
+public class Wallet implements Serializable {
+
+    private static final long serialVersionUID = -6079769300175684582L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+    @NotNull
+    private String name;
+    @NotNull
+    private BigDecimal value;
+}

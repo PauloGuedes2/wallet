@@ -1,5 +1,6 @@
-package com.wallet.entity;
+package com.wallet.repository;
 
+import com.wallet.entity.User;
 import com.wallet.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;

@@ -18,7 +18,7 @@ public class Wallet implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @NotNull
     private String name;
     @NotNull

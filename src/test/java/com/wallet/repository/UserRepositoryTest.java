@@ -1,7 +1,6 @@
 package com.wallet.repository;
 
 import com.wallet.entity.User;
-import com.wallet.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +18,12 @@ import static org.junit.Assert.*;
 public class UserRepositoryTest {
 
     private static final String EMAIL = "email@teste.com";
+
     @Autowired
     UserRepository repository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         User u = new User();
         u.setName("Set up User");
         u.setPassword("Senha123");
@@ -33,14 +33,16 @@ public class UserRepositoryTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
+
         repository.deleteAll();
+
     }
 
     @Test
-    public void testSave(){
+    public void testSave() {
         User u = new User();
-        u.setName("Test");
+        u.setName("Teste");
         u.setPassword("123456");
         u.setEmail("teste@teste.com");
 
@@ -49,9 +51,8 @@ public class UserRepositoryTest {
         assertNotNull(response);
     }
 
-    @Test
-    public void findByEmail(){
-        Optional <User> response = repository.findByEmailEquals(EMAIL);
+    public void testFindByEmail() {
+        Optional<User> response = repository.findByEmailEquals(EMAIL);
 
         assertTrue(response.isPresent());
         assertEquals(response.get().getEmail(), EMAIL);

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wallet.dto.WalletItemDTO;
 import com.wallet.entity.Wallet;
 import com.wallet.entity.WalletItem;
+import com.wallet.service.UserService;
+import com.wallet.service.UserWalletService;
 import com.wallet.service.WalletItemService;
 import com.wallet.util.enums.TypeEnum;
 import org.junit.Test;
@@ -12,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
@@ -35,11 +38,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class WalletItemControllerTest {
 
     @MockBean
     WalletItemService service;
+
+    @MockBean
+    UserWalletService userWalletService;
+    @MockBean
+    UserService userService;
 
     @Autowired
     MockMvc mvc;
@@ -135,13 +144,13 @@ public class WalletItemControllerTest {
         mvc.perform(MockMvcRequestBuilders.put(URL).content(getJsonPayload())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.id").value(ID))
-                .andExpect(jsonPath("$.data.date").value(TODAY.format(getDateFormater())))
-                .andExpect(jsonPath("$.data.description").value(description))
-                .andExpect(jsonPath("$.data.type").value(TypeEnum.SD.getValue()))
-                .andExpect(jsonPath("$.data.value").value(VALUE))
-                .andExpect(jsonPath("$.data.wallet").value(ID));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.data.id").value(ID))
+        .andExpect(jsonPath("$.data.date").value(TODAY.format(getDateFormater())))
+        .andExpect(jsonPath("$.data.description").value(description))
+        .andExpect(jsonPath("$.data.type").value(TypeEnum.SD.getValue()))
+        .andExpect(jsonPath("$.data.value").value(VALUE))
+        .andExpect(jsonPath("$.data.wallet").value(ID));
     }
 
     @Test
@@ -200,7 +209,6 @@ public class WalletItemControllerTest {
         .andExpect(jsonPath("$.errors[0]").value("WalletItem de id "+ 99 + " não encontrada"));
     }
 
-    @Test
     private WalletItem getMockWalletItem() {
         Wallet w = new Wallet();
         w.setId(1L);

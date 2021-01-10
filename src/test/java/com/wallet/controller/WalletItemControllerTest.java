@@ -1,5 +1,6 @@
 package com.wallet.controller;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wallet.dto.WalletItemDTO;
@@ -63,6 +64,7 @@ public class WalletItemControllerTest {
 
     @Test
     public void testSave() throws Exception{
+
         BDDMockito.given(service.save(Mockito.any(WalletItem.class))).willReturn(getMockWalletItem());
 
         mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload())
@@ -76,8 +78,10 @@ public class WalletItemControllerTest {
         .andExpect(jsonPath("$.data.value").value(VALUE))
         .andExpect(jsonPath("$.data.wallet").value(ID));
     }
+
     @Test
     public void testFindBetweenDates() throws Exception {
+
         List<WalletItem> list = new ArrayList<>();
         list.add(getMockWalletItem());
         Page<WalletItem> page = new PageImpl(list);
@@ -101,6 +105,7 @@ public class WalletItemControllerTest {
 
     @Test
     public void testFindByType() throws Exception {
+
         List<WalletItem> list = new ArrayList<>();
         list.add(getMockWalletItem());
 
@@ -120,6 +125,7 @@ public class WalletItemControllerTest {
 
     @Test
     public void testSumByWallet() throws Exception {
+
         BigDecimal value = BigDecimal.valueOf(536.90);
 
         BDDMockito.given(service.sumByWalletId(Mockito.anyLong())).willReturn(value);
@@ -210,6 +216,7 @@ public class WalletItemControllerTest {
     }
 
     private WalletItem getMockWalletItem() {
+
         Wallet w = new Wallet();
         w.setId(1L);
 
@@ -218,6 +225,7 @@ public class WalletItemControllerTest {
     }
 
     public String getJsonPayload() throws JsonProcessingException {
+
         WalletItemDTO dto = new WalletItemDTO();
         dto.setId(ID);
         dto.setDate(DATE);
@@ -231,6 +239,7 @@ public class WalletItemControllerTest {
     }
 
     private DateTimeFormatter getDateFormater() {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return formatter;
     }

@@ -43,6 +43,7 @@ public class WalletItemRepositoryTest {
 
     @Before
     public void setUp() {
+
         Wallet w = new Wallet();
         w.setName("Carteira Teste");
         w.setValue(BigDecimal.valueOf(250));
@@ -57,6 +58,7 @@ public class WalletItemRepositoryTest {
 
     @After
     public void tearDown() {
+
         repository.deleteAll();
         walletRepository.deleteAll();
     }
@@ -78,17 +80,18 @@ public class WalletItemRepositoryTest {
         assertEquals(response.getType(), TYPE);
         assertEquals(response.getValue(), VALUE);
         assertEquals(response.getWallet().getId(), w.getId());
-
     }
 
     @Test(expected = ConstraintViolationException.class)
     public void testSaveInvalidWalletItem() {
+
         WalletItem wi = new WalletItem(null, null, DATE, null, DESCRIPTION, null);
         repository.save(wi);
     }
 
     @Test
     public void testUpdate() {
+
         Optional<WalletItem> wi = repository.findById(savedWalletItemId);
 
         String description = "Descrição alterada";
@@ -105,6 +108,7 @@ public class WalletItemRepositoryTest {
 
     @Test
     public void deleteWalletItem() {
+
         Optional<Wallet> wallet = walletRepository.findById(savedWalletId);
         WalletItem wi = new WalletItem(null, wallet.get(), DATE, TYPE, DESCRIPTION, VALUE);
 
@@ -119,13 +123,13 @@ public class WalletItemRepositoryTest {
 
     @Test
     public void testFindBetweenDates() {
+
         Optional<Wallet> w = walletRepository.findById(savedWalletId);
 
         LocalDateTime localDateTime = DATE.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         Date currentDatePlusFiveDays = Date.from(localDateTime.plusDays(5).atZone(ZoneId.systemDefault()).toInstant());
         Date currentDatePlusSevenDays = Date.from(localDateTime.plusDays(7).atZone(ZoneId.systemDefault()).toInstant());
-
 
         repository.save(new WalletItem(null, w.get(), currentDatePlusFiveDays, TYPE, DESCRIPTION, VALUE));
         repository.save(new WalletItem(null, w.get(), currentDatePlusSevenDays, TYPE, DESCRIPTION, VALUE));
@@ -140,6 +144,7 @@ public class WalletItemRepositoryTest {
 
     @Test
     public void testFindByType() {
+
         List<WalletItem> response = repository.findByWalletIdAndType(savedWalletId, TYPE);
 
         assertEquals(response.size(), 1);
@@ -161,6 +166,7 @@ public class WalletItemRepositoryTest {
 
       @Test
       public void testSumByWallet() {
+
           Optional<Wallet> w = walletRepository.findById(savedWalletId);
 
           repository.save(new WalletItem(null, w.get(), DATE, TYPE, DESCRIPTION, BigDecimal.valueOf(150.80)));

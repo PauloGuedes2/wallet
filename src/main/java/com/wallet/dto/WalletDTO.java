@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WalletDTO {
 
-    private long Id;
+    private Long Id;
     @Length(min=3, message = "O nome deve conter no mínimo 3 caracteres")
     @NotNull(message = "O nome não pode ser nulo")
     private String name;

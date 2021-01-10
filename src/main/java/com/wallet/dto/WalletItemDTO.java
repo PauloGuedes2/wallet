@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class WalletItemDTO {
 
-    private long id;
+    private Long id;
     @NotNull(message = "Insira o id da carteira")
     private Long wallet;
     @NotNull(message = "Informe uma data")

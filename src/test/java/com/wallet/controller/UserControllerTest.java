@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 public class UserControllerTest {
 
-    private static final long ID = 1L;
+    private static final Long ID = 1L;
     private static final String EMAIL = "email@teste.com";
     private static final String NAME = "User Test";
     private static final String PASSWORD = "123456";

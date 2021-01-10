@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
-    private long id;
+    private Long id;
     @Email(message = "Email inválido")
     private String email;
     @Length(min=3, max=50, message = "O nome deve conter entre 3 e 50 caracteres")

@@ -43,6 +43,7 @@ public class WalletItemServiceTest {
 
     @Test
     public void testSave() {
+
         BDDMockito.given(repository.save(Mockito.any(WalletItem.class))).willReturn(getMockWalletItem());
 
         WalletItem response = service.save(new WalletItem());
@@ -54,6 +55,7 @@ public class WalletItemServiceTest {
 
     @Test
     public void testFindBetweenDates() {
+
         List<WalletItem> list = new ArrayList<>();
         list.add(getMockWalletItem());
         Page<WalletItem> page = new PageImpl(list);
@@ -70,6 +72,7 @@ public class WalletItemServiceTest {
 
     @Test
     public void testFindByType() {
+
         List<WalletItem> list = new ArrayList<>();
         list.add(getMockWalletItem());
 
@@ -83,6 +86,7 @@ public class WalletItemServiceTest {
 
     @Test
     public void testSumByWallet() {
+
         BigDecimal value = BigDecimal.valueOf(45);
 
         BDDMockito.given(repository.sumByWalletId(Mockito.anyLong())).willReturn(value);
@@ -93,6 +97,7 @@ public class WalletItemServiceTest {
     }
 
     private WalletItem getMockWalletItem() {
+
         Wallet w = new Wallet();
         w.setId(1L);
 

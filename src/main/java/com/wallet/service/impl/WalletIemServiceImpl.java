@@ -1,4 +1,4 @@
-package com.wallet.service.Impl;
+package com.wallet.service.impl;
 
 import com.wallet.entity.WalletItem;
 import com.wallet.repository.WalletItemRepository;

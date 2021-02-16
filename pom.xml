@@ -101,8 +101,11 @@
 			<version>2.9.2</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<resources>
 			<resource>

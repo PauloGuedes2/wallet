@@ -2,8 +2,9 @@ dist: trusty
 language: java
 jdk:
   - oraclejdk11
-  before_install:
+before_install:
   - export TZ=Brazil/East
+  - chmod +x mvnw
 deploy:
   provider: heroku
   api_key:

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wallet.dto.UserDTO;
 import com.wallet.entity.User;
 import com.wallet.service.UserService;
+import com.wallet.util.enums.RoleEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -34,7 +35,6 @@ public class UserControllerTest {
     private static final String PASSWORD = "123456";
     private static final String URL = "/user";
 
-
     @MockBean
     UserService service;
 
@@ -43,7 +43,6 @@ public class UserControllerTest {
 
     @Test
     public void testSave () throws Exception {
-
         BDDMockito.given(service.save(Mockito.any(User.class))).willReturn(getMockUser());
 
         mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, EMAIL, NAME, PASSWORD))
@@ -53,6 +52,7 @@ public class UserControllerTest {
         .andExpect(jsonPath("$.data.id").value(ID))
         .andExpect(jsonPath("$.data.email").value(EMAIL))
         .andExpect(jsonPath("$.data.name").value(NAME))
+        .andExpect(jsonPath("$.data.role").value(RoleEnum.ROLE_ADMIN.toString()))
         .andExpect(jsonPath("$.data.password").doesNotExist());
     }
 
@@ -71,6 +71,7 @@ public class UserControllerTest {
         u.setEmail(EMAIL);
         u.setName(NAME);
         u.setPassword(PASSWORD);
+        u.setRole(RoleEnum.ROLE_ADMIN);
 
         return u;
     }
@@ -81,6 +82,7 @@ public class UserControllerTest {
         dto.setEmail(email);
         dto.setName(name);
         dto.setPassword(password);
+        dto.setRole(RoleEnum.ROLE_ADMIN.toString());
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(dto);

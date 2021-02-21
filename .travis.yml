@@ -1,7 +1,6 @@
 dist: trusty
 language: java
 jdk:
-  - oraclejdk11
   - openjdk11
   before_install:
   - export TZ=Brazil/East

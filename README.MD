@@ -27,7 +27,7 @@ Certifique-se de ter o Maven instalado e adicionado ao PATH do seu sistema opera
 ```
 git clone https://github.com/PauloGuedes2/wallet.git
 mvn spring-boot:run
-Acesse os endpoints através da url http://localhost:8080
+Acesse os endpoints através da url: http://localhost:8080
 ```
 Também é possível compilar o projeto para executar em um ambiente de produção, para isso execute o seguinte comando na raiz do projeto.
 
